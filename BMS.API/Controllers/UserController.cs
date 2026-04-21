@@ -59,20 +59,13 @@ namespace BMS.API.Controllers
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
         }
+
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             return Ok("Deleted");
         }
-        [Authorize(Roles = "Member")]
-        [HttpGet("getBooks")]
-        public async Task<IActionResult> GetBooks()
-        {
-            var result = await _bookService.GetBooksWithStock();
-            return Ok(result);
-        }
-
         
     }
 }

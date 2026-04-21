@@ -1,5 +1,6 @@
 ﻿using BMS.Core.DTOs;
 using BMS.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BMS.API.Controllers
@@ -15,6 +16,7 @@ namespace BMS.API.Controllers
             _orderService = orderService;
         }
 
+        [Authorize(Roles = "Member, Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
         {
@@ -29,6 +31,7 @@ namespace BMS.API.Controllers
             });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("export-daily-report")]
         public async Task<IActionResult> Export()
         {
