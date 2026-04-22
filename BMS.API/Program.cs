@@ -79,7 +79,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    // JWT 設定
+    // JWT 糧]穢w
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -87,7 +87,7 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "請輸入 JWT Token（格式：{token}）"
+        Description = "翻��聶矇瞻J JWT Token癒]簧疆礎癒癒G{token}癒^"
     });
 
     options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
@@ -139,5 +139,5 @@ RecurringJob.AddOrUpdate<IOrderService>(
     service => service.ExportOrdersAsync(),
     Cron.Daily(3) 
 );
-// make you feel my love should I give up or should I just keep chasing pavement 
+
 app.Run();
