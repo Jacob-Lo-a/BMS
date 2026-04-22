@@ -3,6 +3,7 @@ using BMS.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Renci.SshNet.Messages;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -34,8 +35,14 @@ namespace BMS.API.Controllers
             if (user == null)
             {
                 _securityLogger.LogWarning("Login failed for user: {Username}", dto.Username);
-                return Unauthorized();
+                return Unauthorized(new {Success = false, Message = "帳號或密碼錯誤"});
             }
+            else
+            {
+                dto.Success = true;
+                dto.Message = "登入成功";
+            }
+
 
 
 
@@ -54,8 +61,11 @@ namespace BMS.API.Controllers
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             );
 
+            
             return Ok(new
             {
+                success = dto.Success,
+                message  = dto.Message,
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
         }
